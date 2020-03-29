@@ -1,0 +1,6 @@
+git init
+git add .
+git commit -m 'mi primer commit'
+git remote add origin https://github.com/cristian150291/Beer-Point-Desarrollo.git
+git push -u origin master
+
