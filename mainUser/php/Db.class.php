@@ -1,0 +1,109 @@
+<?php
+
+/* Clase encargada de gestionar las conexiones a la base de datos */
+Class Db{
+
+   private $servidor='localhost';
+   private $usuario='postgres';
+   private $password='cristian';
+   private $base_datos='beerpoint';
+   private $link;
+   private $stmt;
+   private $array;
+   private $port='5432';
+
+
+   static $_instance;
+
+   /*La función construct es privada para evitar que el objeto pueda ser creado mediante new*/
+   private function __construct(){
+      $this->conectar();
+   }
+
+   /*Evitamos el clonaje del objeto. Patrón Singleton*/
+   private function __clone(){ }
+
+   /*Función encargada de crear, si es necesario, el objeto. Esta es la función que debemos llamar desde fuera de la clase para instanciar el objeto, y así, poder utilizar sus métodos*/
+   public static function getInstance(){
+      if (!(self::$_instance instanceof self)){
+         self::$_instance=new self();
+      }
+      return self::$_instance;
+   }
+
+   /*Realiza la conexión a la base de datos.*/
+   private function conectar(){
+    $cadenaConexion = "host=$this->servidor port=$this->port dbname=$this->base_datos user=$this->usuario password=$this->password";
+    $conexion = pg_connect($cadenaConexion) or die("Error en la Conexión: Update".pg_last_error());
+      $this->link=pg_connect($cadenaConexion) or die("Error en la Conexión: Update ".pg_last_error());
+   }
+
+   /*Método para ejecutar una sentencia sql*/
+   public function ejecutar($sql){
+      $this->stmt=pg_query($this->link,$sql);
+      return $this->stmt;
+   }
+
+   /*Método para obtener una fila de resultados de la sentencia sql*/
+   public function obtener_fila($stmt,$fila){
+      if ($fila==0){
+         $this->array=pg_fetch_array($stmt);
+      }else{
+        pg_lo_seek($stmt,$fila);
+         $this->array=pg_fetch_array($stmt);
+      }
+      return $this->array;
+   }
+
+   /**Metodo para cerrar conexion postgres */
+   public function cerrar_pg () {
+      pg_close($this->link);
+   }
+
+   /**
+    * Metodo que devuelve lista por tabla
+    */
+
+    public function listForTable (){
+       //generamo la query final que precisamos
+       $queryResult= "SELECT id,dni,nombre,apellido,mail FROM usuario.usuario ORDER BY id;";
+
+       //Ejecutamos la query
+       $this->stmt=pg_query($this->link,$queryResult) or die("Error en la consulta,function listForTable :".preg_last_error());
+
+       return $this->stmt;
+    }
+
+
+    public function armarColumnString ($column){
+      $columnasString = "";
+      foreach ($column as $valor) {
+        $columnasString += $columnasString + $valor + ",";               
+      }
+      $columnasString=substr($columnasString,0, strlen($columnasString)-1);
+      return $columnasString;
+    }
+
+
+    public function listForTableGeneric ($tabla,$schema,$columnas,$subtablas,$idTabla){
+
+      $columnasPedir = "";
+      $columnasPedir =  implode(",",$columnas);  
+      if(empty(trim($subtablas))){
+        $queryResult= "SELECT $columnasPedir FROM $schema.$tabla ORDER BY id;"; 
+      }else{
+        if(empty(trim($idTabla))){
+          $queryResult= "SELECT $columnasPedir FROM $schema.$tabla t1 inner join $subtablas t2 on t1.id = t2.id_empresa  ORDER BY t1.id;"; 
+        }else{
+          $queryResult= "SELECT $columnasPedir FROM $schema.$tabla t1 inner join $subtablas t2 on t1.id = t2.id_empresa WHERE t1.id = $idTabla  ORDER BY t1.id;"; 
+        }
+        
+      }
+       //Ejecutamos la query
+       $this->stmt=pg_query($this->link,$queryResult) or die("Error en la consulta,function listForTable :".preg_last_error());
+
+       return $this->stmt;
+    }    
+
+}
+?>

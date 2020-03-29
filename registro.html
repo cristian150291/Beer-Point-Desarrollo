@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./css/bootsSocial/bootstrap-social.css">
+
+    <!-- inserto icono -->
+    <link rel="icon" type="image/png" href="./css/img/user.png" />
+
+    <link rel="stylesheet" href="css/cssBeer.css">
+    
+    
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js" async="async"></script>
+
+    <!--JQUERY-->
+    
+     
+    <title>Registro-BeerPoint</title>
+</head>
+<body class="bg-light">
+        <div class="container">
+                <div class="row">
+                    <div class="col py-5 text-center">
+                        <h2 class="text-muted">Ingreso Nuevo Usuario</h2>
+                        <p class="lead">Usted se esta registrando en Beer-Point,bienvenido y disfrute de las promociones.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-8 order-2 order-md-1">
+                        <h4 class="mb-5">Complete con sus datos</h4>
+                        <form action="">
+                            <div class="row">
+                                <div class="col-12 col-sm-6 mb-3">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" class="form-control" id="Nregistro" name="nombre" placeholder="Nombre">
+                                </div>
+                                <div class="col-12 col-sm-6 mb-3">
+                                    <label for="apellido">Apellido</label>
+                                    <input type="text" class="form-control" id="Aregistro" name="apellido" placeholder="Apellido">
+                                </div>
+                            </div>
+        
+                            <div class="mb-3">
+                                <label for="correo">Correo Electronico </label>
+                                <input type="email" class="form-control" placeholder="nombre@correo.com" name="correo" id="Mregistro">
+                            </div>
+        
+                            <div class="mb-3">
+                                <label for="direccion2">Numero de Dni</label>
+                                <input type="text" class="form-control" placeholder="Ingrese su dni" name="dni" id="Dregistro">
+                            </div>
+        
+                            <div class="row">
+                                <div class="col-12 col-sm-4 mb-3">
+                                    <label for="pais">Fecha Nacimiento</label>
+                                    <input type="date" name="bday" min="1000-01-01" max="3000-12-31" class="form-control">                                    
+                                </div>
+
+                                <div class="col-12 col-sm-4 mb-3">
+                                    <label for="estado">Usuario</label>
+                                    <input type="text" class="form-control" placeholder="Ingrese Usuario" name="usuario" id="Sregistro">
+                                </div>
+
+                                <div class="col-12 col-sm-4 mb-3">
+                                    <label for="codigo-postal">Password</label>
+                                    <input type="password"  class="form-control" id="Pregistro" placeholder="Password">
+                                </div>
+                            </div>
+                              
+                            <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="verRegistro">
+                                    <label class="form-check-label" for="materialUnchecked" id="lpass">Mostrar Password</label>                     
+                            </div>  
+       
+        
+                            <hr class="mb-4">
+                            <input type="submit" class="btn btn-block btn-lg btn-primary" value="Registrarse" id="registro">
+                        </form>
+                        <div id="registrores"></div>
+                    </div>
+
+                    
+                    <div class="col-12 col-md-4 order-1 order-md-2">
+                            
+                            <div id="beer" >
+                                    <div class="center-outer">
+                                        <div class="center-inner">        
+                                            <div class="bubbles">
+                                                <h1>Beer-Point</h1>
+                                            </div>        
+                                        </div>
+                                    </div>
+                            </div>
+
+                                <script>
+                                    jQuery(document).ready(function($){
+                                                                                // Define a blank array for the effect positions. This will be populated based on width of the title.
+                                         var bArray = [];
+                                         // Define a size array, this will be used to vary bubble sizes
+                                         var sArray = [4,6,8,10];
+
+                                         // Push the header width values to bArray
+                                         for (var i = 0; i < $('.bubbles').width(); i++) {
+                                             bArray.push(i);
+                                         }
+                                          
+                                         // Function to select random array element
+                                         // Used within the setInterval a few times
+                                         function randomValue(arr) {
+                                             return arr[Math.floor(Math.random() * arr.length)];
+                                         }
+
+                                         // setInterval function used to create new bubble every 350 milliseconds
+                                         setInterval(function(){
+                                              
+                                             // Get a random size, defined as variable so it can be used for both width and height
+                                             var size = randomValue(sArray);
+                                             // New bubble appeneded to div with it's size and left position being set inline
+                                             // Left value is set through getting a random value from bArray
+                                             $('.bubbles').append('<div class="individual-bubble" style="left: ' + randomValue(bArray) + 'px; width: ' + size + 'px; height:' + size + 'px;"></div>');
+                                              
+                                             // Animate each bubble to the top (bottom 100%) and reduce opacity as it moves
+                                             // Callback function used to remove finsihed animations from the page
+                                             $('.individual-bubble').animate({
+                                                 'bottom': '100%',
+                                                 'opacity' : '-=0.7'
+                                             }, 3000, function(){
+                                                 $(this).remove()
+                                             }
+                                             );
+
+
+                                         }, 350);
+                                            
+                                    });
+                                </script>    
+                            
+                    </div>
+
+                </div>
+        
+                <footer class="my-5 py-5 text-muted text-center text-small">
+                    <p class="mb-1">© 2017-2018 Company Beer-Point</p>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="#">Privacidad</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">Terminos y Condiciones</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">Soporte</a>
+                        </li>
+                    </ul>
+                </footer>
+            </div>               
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" async="async"></script>
+
+    <!-- bootstrap.js y js de la app 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
+    <!-- Compiled and minified Bootstrap CSS 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    -->
+     <script src="./js/bootstrap.min.js" async="async"></script>   
+    <script src="js.js"> </script>
+           
+</body>
+</html>
