@@ -7,7 +7,7 @@
   text-decoration: none;
 }
 
-/* line 3, dev/scss/style.scss */
+/* line 1, dev/scss/modulos/index.scss */
 .container {
   width: 100%;
   height: 100vh;
@@ -16,7 +16,7 @@
   justify-content: center;
 }
 
-/* line 11, dev/scss/style.scss */
+/* line 9, dev/scss/modulos/index.scss */
 .fondo {
   width: 100%;
   height: 100vh;
@@ -24,7 +24,7 @@
   z-index: 1;
 }
 
-/* line 19, dev/scss/style.scss */
+/* line 17, dev/scss/modulos/index.scss */
 .filter {
   background-color: #000;
   -webkit-filter: blur(50px) opacity(42%);
@@ -35,34 +35,53 @@
   z-index: 10;
 }
 
-/* line 28, dev/scss/style.scss */
+/* line 26, dev/scss/modulos/index.scss */
 .logo {
   width: 85%;
   position: absolute;
   z-index: 20;
-  top: 10vw;
+  top: 5vw;
 }
 
-/* line 36, dev/scss/style.scss */
+/* line 34, dev/scss/modulos/index.scss */
 .ingreso-content {
   display: flex;
   align-items: center;
+  justify-content: center;
   z-index: 20;
+  width: 70vw;
+  height: 55vw;
+  border: 3px solid orange;
+  border-radius: 10px;
+  position: relative;
+  top: 18%;
 }
 
-/* line 42, dev/scss/style.scss */
+/* line 47, dev/scss/modulos/index.scss */
+.ingreso {
+  width: 60vw;
+  height: 45vw;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+/* line 58, dev/scss/modulos/index.scss */
 .form-group {
   width: 10vw;
-  height: 10vw;
+  height: 14vw;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* line 54, dev/scss/style.scss */
+/* line 68, dev/scss/modulos/index.scss */
 .placeholder {
   width: 50vw;
-  height: 7vw;
+  height: 10vw;
   color: orange;
   border-radius: 10px;
   text-align: center;
@@ -71,24 +90,35 @@
   background: transparent;
 }
 
-/* line 65, dev/scss/style.scss */
+/* line 80, dev/scss/modulos/index.scss */
 ::-webkit-input-placeholder {
   color: orange;
 }
 
-/* line 67, dev/scss/style.scss */
+/* line 82, dev/scss/modulos/index.scss */
 :-moz-placeholder {
   /* Firefox 18- */
   color: red;
 }
 
-/* line 69, dev/scss/style.scss */
+/* line 84, dev/scss/modulos/index.scss */
 ::-moz-placeholder {
   /* Firefox 19+ */
   color: red;
 }
 
-/* line 71, dev/scss/style.scss */
+/* line 86, dev/scss/modulos/index.scss */
 :-ms-input-placeholder {
   color: red;
+}
+
+/* line 88, dev/scss/modulos/index.scss */
+.enter {
+  width: 40vw;
+  height: 10vw;
+  position: absolute;
+  border-radius: 10px;
+  background-color: orange;
+  border-color: orange;
+  color: #ffffff;
 }
