@@ -54,7 +54,23 @@
 		                echo json_encode($jTableResult,true);
 
 		        	}				
-		        }	
+		        }else if($_GET["action"] == "valoracion"){
+		        	$idEmp = $_POST['ID'];
+		        	$valor = $_POST['valor'];
+		        	$sql = "UPDATE usuario.empresa SET prom_valoracion=prom_valoracion + $valor WHERE id = $idEmp;";
+		        	$stmt = $db->ejecutar($sql);
+		        	$sql = "UPDATE usuario.empresa SET cant_valoracion=cant_valoracion+1 WHERE id = $idEmp;";
+		        	$stmt = $db->ejecutar($sql);
+		        	$sql = "UPDATE usuario.empresa SET prestigio =prom_valoracion/cant_valoracion WHERE id = $idEmp;";
+		        	$stmt = $db->ejecutar($sql);
+
+		        	if ($stmt){
+						header('Content-type: application/json; charset=utf-8');
+		                echo "1";
+		        	}else{
+		        		echo "-1";
+		        	}
+		        }
 
 	    	}catch(Exception $ex) {
 		        //Return error message

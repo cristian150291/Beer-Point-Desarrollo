@@ -1,8 +1,9 @@
 $(document).ready(function(){
 
-   var ServiceURL = 'http://192.168.0.40/Pagina/login/mainUser/php/';   
+   var ServiceURL = 'http://192.168.0.140/Pagina/login/mainUser/php/';   
    var idp = $("#idUsuario").html(); //obtengo numero de id_usuario registrado   
    var dataEmpresa;
+   var idEmpresaGrid;
 
    /**
    * Realizamos una llamda al servicio y cargamos la grila empresas utilizando metodos del plugin
@@ -34,7 +35,7 @@ $(document).ready(function(){
     var valores = [];
     $('#tabla_empresasGrid').on('dblclick', 'tbody tr', function(event) {                        
       //alert("Tamño es : "+ $(this).find("th").length);}        
-      var idEmpresaGrid =  $(this).find("td")[0].innerText;
+      idEmpresaGrid =  $(this).find("td")[0].innerText;
       var respuestaFechasEmp;
       $.ajax({                  
           type:'POST',
@@ -45,31 +46,37 @@ $(document).ready(function(){
               respuestaFechasEmp = response;
               return false;                        
           }
-    });
+      });
 
-    for(var i=0; i<dataEmpresa.Records.length; i++){     
-      if (dataEmpresa.Records[i].id == idEmpresaGrid){
-        $("#nombreEmpresa").find('span').html(dataEmpresa.Records[i].descripcion);
+      for(var i=0; i<dataEmpresa.Records.length; i++){     
+        if (dataEmpresa.Records[i].id == idEmpresaGrid){
+          $("#nombreEmpresa").find('span').html(dataEmpresa.Records[i].descripcion);
+        }
       }
-    }
 
-    $('#miModalEmp').modal('show');
-        //$('.modal_Emp').modal('show');
-        /*rowIndex = this.rowIndex;
-        valores = [$(this).find("th").length];
-        $(this).find("th").each(function(index,valor){
-            valores[index]=$(this).html();
-        });            
-        $("#saveReg").hide();
-        $("#updateRed").show();
-        $("#delete").show();
-        modalShow();                            
-        $("#form-in").find("input").each(function(index,valor){                 
-            $(this).val(valores[index]);
-        });*/
+      $('#miModalEmp').modal('show');
     });
 
-
+    /**
+    *Evento click para valoracion de empresa, en este caso debe haber un selection
+    * del 1 al 5 en prodio, el texto es solo para prueba del server
+    */
+    // *******************    Terminar funcion Valoracion  **********************************
+    $("#btn_valorar").click(function(){
+       var valorIng = $("#text-valoracion").val();
+        $.ajax({                  
+          type:'POST',
+          url:'./php/actionEmpresa.php?action=valoracion', 
+          data:{ID:idEmpresaGrid,valor:valorIng},     
+          success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve                                                    
+              console.log(response);
+              alert(response);
+              return false;                        
+          }
+        });       
+       return false;
+    });
+    // **************************************************************************************
 
     $("#modalId").click(function(){
         $("#miModal").modal("show");

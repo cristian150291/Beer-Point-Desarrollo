@@ -100,10 +100,12 @@
                   <!-- Form para reingreso de datos del usaurio -->
                   <div id="nombreEmpresa">
                      <h4>Detalle de la empresa <span> </span></h4>
-                  </div>
-                  
+                  </div>                  
                     <form id="formModalEmp">
-                        
+                        <div id="valorarEMpresa">
+                            <input id="text-valoracion" class="form-control" type="text" placeholder="Valorar empresa" >
+                            <button value="Enviar" id="btn_valorar" class="btn btn-success">Enviar</button>
+                        </div>
                     </form>
                 </div>
           <div class="modal-footer">
