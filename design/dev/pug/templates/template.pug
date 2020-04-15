@@ -2,10 +2,24 @@
 html(lang="es")
     head
         meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
-        link(rel="stylesheet", href="css/style.css")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=no")
+        title Beer-Point
+        link(rel="stylesheet", href="css/style.css")        
     body
-        block slider
+        .container
+            img(src="img/imagenes/prueba2.jpg", alt="").fondo
+            .filter
+            img(src="img/logo/logo-beer-point.svg", alt="").logo
+            .ingreso-content
+                form(action="" method="get").ingreso
+                    .form-group
+                        label(for="name").label 
+                        input#name.placeholder(type="text" name="name" placeholder="Usuario")
+                    .form-group
+                        label(for="pass").label 
+                        input#name.placeholder(type="text" name="pass" placeholder="Contraseña")
+                    .form-group
+                        button.enter(type="submit")   Entrar
+            block slider
     script(src="js/jquery-3.5.0.min.js")          
     script(src="js/slider.js")

@@ -1,9 +1,13 @@
 .slideshow{
-    width: 100%;
-    height: 250px;
-    background-color: purple;
-    position: relative;
-    
+    width: 90%;
+    height: 100%;
+    position: absolute;    
+    z-index: 14;
+    grid-row: 3/4;
+    justify-self: center;
+    border: 1px solid $cl-prin;
+    border-radius: 2px;
+    filter: drop-shadow(2.5px 2.5px 1px rgba(0,0,0,.5));
 }
 
 .slider{
@@ -13,29 +17,41 @@
     left: 0;
     position: absolute;
     
+    
 }
 
 .slider-li{
     width: 100%;
     height: 100%;
     
+    
 }
 
 .slider-img{
     width: 100%;
     height: 100%;
-    
+   
+}
+
+.filter-sli{
+    background-color: #000;
+    filter: blur(50px) opacity(15%);    
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 10; 
+    grid-row: 1/5;   
 }
 
 
 .pagination{
     width: 20%;
-    top: 87%;
+    top: 80%;
     left: 40%;
     position: absolute;
     display: flex;
     justify-content: center;    
-    font-size: 20px; 
+    font-size: 8vw; 
     color: #858585;      
     z-index: 15;
     cursor: pointer;
@@ -56,7 +72,7 @@
     position: absolute;   
     z-index: 16;
     cursor: pointer;    
-    filter: drop-shadow(0px 1px 0px white);
+    filter: drop-shadow(0px .5px 0px white);
 }
 
 .left{
@@ -70,19 +86,7 @@
 
 .icon-chevron-left, .icon-chevron-right{
     padding: 0 10px;
-    font-size: 5vw;
-   
+    font-size: 8vw;
+    color: $cl-prin;   
 }
 
-.animacion{
-    display: block;  
-        animation: slide 3s ;
-        @keyframes slide {
-            0%,85%{
-                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)
-            }
-            100%{
-                clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%)
-            }
-        }
-}
